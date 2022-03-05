@@ -17,6 +17,8 @@ public class Main {
             ResultSet myResultSet = getResultSet(myStatement, sql);
             readResult(myResultSet, new ArrayList<>(Arrays.asList("customer_id", "first_name")));
             closeResultSet(myResultSet);
+            closeStatement(myStatement);
+            closeConnection(conn);
         }
 
         System.out.println("use OracleDataSource");
@@ -28,6 +30,8 @@ public class Main {
             readResult(myResultSet, new ArrayList<>(Arrays.asList("name", "description", "price")));
             closeResultSet(myResultSet);
             insertData(myStatement);
+            closeStatement(myStatement);
+            closeConnection(conn2);
         }
     }
 
@@ -64,12 +68,28 @@ public class Main {
         }
     }
 
+    public static void closeConnection(Connection connection) {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static Statement createStatement(Connection connection) {
         try {
             return connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void closeStatement(Statement statement) {
+        try {
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
