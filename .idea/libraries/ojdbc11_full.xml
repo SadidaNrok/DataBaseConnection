@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="ojdbc11-full">
+    <CLASSES>
+      <root url="file://C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full" recursive="false" />
+  </library>
+</component>
