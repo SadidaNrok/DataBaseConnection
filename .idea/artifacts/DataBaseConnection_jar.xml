@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DataBaseConnection:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DataBaseConnection_jar</output-path>
+    <root id="archive" name="DataBaseConnection.jar">
+      <element id="module-output" name="DataBaseConnection" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/ons.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/rsi.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/xdb.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/ucp11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/ojdbc11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/orai18n.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/oraclepki.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/osdt_cert.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/osdt_core.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/simplefan.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/xmlparserv2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_321/lib/ojdbc11-full/xmlparserv2_sans_jaxp_services.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

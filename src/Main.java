@@ -1,9 +1,11 @@
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+import oracle.jdbc.OraclePreparedStatement;
+import oracle.jdbc.OracleResultSet;
 import oracle.jdbc.pool.OracleDataSource;
+import oracle.sql.CharacterSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -108,8 +110,8 @@ public class Main {
     public static void closeResultSet(ResultSet resultSet) {
         try {
             resultSet.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -133,6 +135,71 @@ public class Main {
             System.out.println("success");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+}
+
+class BasicExample {
+    public static void main(String[] args) {
+        try {
+            DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@localhost:1521:orcl",
+                    "sys as sysdba",
+                    "123"
+            );
+            connection.setAutoCommit(false);
+            oracle.sql.NUMBER customerID = new oracle.sql.NUMBER(8);
+            int customerIDInt = customerID.intValue();
+            System.out.println("customerIDInt = " + customerIDInt);
+            oracle.sql.CharacterSet characterSet = CharacterSet.make(CharacterSet.US7ASCII_CHARSET);
+            oracle.sql.CHAR firstName = new oracle.sql.CHAR("Jason", characterSet);
+            String firstNameString = firstName.stringValue();
+            System.out.println("firstNameString = " + firstNameString);
+            oracle.sql.CHAR lastName = new oracle.sql.CHAR("Price", characterSet);
+            System.out.println("lastName = " + lastName);
+            oracle.sql.DATE dob = new oracle.sql.DATE("1969-02-22 13:54:12");
+            String dobString = dob.stringValue();
+            System.out.println("dobString = " + dobString);
+            OraclePreparedStatement oraclePreparedStatement = (OraclePreparedStatement) connection.prepareStatement(
+                    "insert into customers values (?, ?, ?, ?, ?)"
+            );
+            oraclePreparedStatement.setNUMBER(1, customerID);
+            oraclePreparedStatement.setCHAR(2, firstName);
+            oraclePreparedStatement.setCHAR(3, lastName);
+            oraclePreparedStatement.setDATE(4, dob);
+            oraclePreparedStatement.setNull(5, Types.CHAR);
+            oraclePreparedStatement.execute();
+            System.out.println("Added row to customer table");
+
+            Statement statement = connection.createStatement();
+            OracleResultSet oracleResultSet = (OracleResultSet) statement.executeQuery(
+                    "select rowid, t.* from customers t where t.customer_id = 8"
+            );
+            System.out.println("Retrieved row from customers table");
+            oracle.sql.ROWID rowid;
+            oracle.sql.CHAR phone = new oracle.sql.CHAR("", characterSet);
+            while (oracleResultSet.next()) {
+                rowid = oracleResultSet.getROWID("rowid");
+                customerID = oracleResultSet.getNUMBER("customer_id");
+                firstName = oracleResultSet.getCHAR("first_name");
+                lastName = oracleResultSet.getCHAR("last_name");
+                dob = oracleResultSet.getDATE("dob");
+                phone = oracleResultSet.getCHAR("phone");
+                System.out.println("rowid = " + rowid.stringValue());
+                System.out.println("customerID = " + customerID.stringValue());
+                System.out.println("firstName = " + firstName);
+                System.out.println("lastName = " + lastName);
+                System.out.println("dob = " + dob.stringValue());
+                System.out.println("phone = " + phone);
+            }
+
+            oracleResultSet.close();
+            connection.rollback();
+            oraclePreparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
