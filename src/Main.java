@@ -22,7 +22,8 @@ public class Main {
             closeStatement(myStatement);
             closeConnection(conn);
         }
-
+        //Create new branch
+        //Second line
         System.out.println("use OracleDataSource");
         Connection conn2 = getDataSource();
         if (conn2 != null) {
