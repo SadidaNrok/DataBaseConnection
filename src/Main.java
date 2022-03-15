@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Connection conn = getConnection();
 
-
+        //Test comments
         System.out.println("use DriverManager");
         if (conn != null) {
             Statement myStatement = createStatement(conn);
